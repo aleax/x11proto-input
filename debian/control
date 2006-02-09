@@ -9,7 +9,7 @@ Standards-Version: 3.6.1.0
 Package: x11proto-input-dev
 Architecture: all
 Depends: ${shlibs:Depends}, ${misc:Depends}, x11-common
-Pre-Depends: x11-common (>= 1.0)
+Pre-Depends: x11-common (>= 1:1.0)
 Conflicts: libxi-dev (<< 6.8.2-16)
 Replaces: libxi-dev (<< 6.8.2-16)
 Description: X11 Input extension wire protocol
