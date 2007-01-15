@@ -1,3 +1,10 @@
+x11proto-input (1.4-1) experimental; urgency=low
+
+  * New upstream version (X11R7.2).
+  * Use debhelper 5.
+
+ -- Drew Parsons <dparsons@debian.org>  Sun, 12 Nov 2006 20:44:18 +1100
+
 x11proto-input (1.3.2-4) unstable; urgency=low
 
   * Test for obj-$(DEB_BUILD_GNU_TYPE) before creating it during build;
