@@ -1,3 +1,9 @@
+x11proto-input (1.4.1-1) experimental; urgency=low
+
+  * New upstream release.
+
+ -- Julien Cristau <jcristau@debian.org>  Thu, 15 Feb 2007 16:04:00 +0100
+
 x11proto-input (1.4-1) experimental; urgency=low
 
   * New upstream version (X11R7.2).
