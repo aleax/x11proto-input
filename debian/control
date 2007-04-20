@@ -2,9 +2,11 @@ Source: x11proto-input
 Section: x11
 Priority: optional
 Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
-Uploaders: David Nusinow <dnusinow@debian.org>, Branden Robinson <branden@debian.org>, Fabio M. Di Nitto <fabbione@fabbione.net>, Andres Salomon <dilinger@debian.org>, Drew Parsons <dparsons@debian.org>
+Uploaders: David Nusinow <dnusinow@debian.org>, Branden Robinson <branden@debian.org>, Andres Salomon <dilinger@debian.org>, Drew Parsons <dparsons@debian.org>
 Build-Depends: debhelper (>= 5)
 Standards-Version: 3.7.2
+XS-Vcs-Git: git://git.debian.org/git/pkg-xorg/proto/x11proto-input
+XS-Vcs-Browser: http://git.debian.org/?p=pkg-xorg/proto/x11proto-input.git
 
 Package: x11proto-input-dev
 Architecture: all
@@ -19,6 +21,3 @@ Description: X11 Input extension wire protocol
  More information about X.Org can be found at:
  <URL:http://xorg.freedesktop.org>
  <URL:http://lists.freedesktop.org/mailman/listinfo/xorg>
- .
- This module can be found as the module 'proto/Input' at
- :pserver:anoncvs@cvs.freedesktop.org:/cvs/xorg

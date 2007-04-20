@@ -1,3 +1,11 @@
+x11proto-input (1.4.1-2) UNRELEASED; urgency=low
+
+  * Add XS-Vcs-* to debian/control.
+  * Remove Fabio from Uploaders with his permission.
+  * Drop outdated CVS info from the description.
+
+ -- Julien Cristau <jcristau@debian.org>  Fri, 20 Apr 2007 21:48:24 +0200
+
 x11proto-input (1.4.1-1) experimental; urgency=low
 
   * New upstream release.
