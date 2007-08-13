@@ -1,3 +1,11 @@
+x11proto-input (1.4.2-2) UNRELEASED; urgency=low
+
+  * Update the long description.
+  * Add URL in debian/copyright.
+  * Remove Fabio from Uploaders, with his permission.
+
+ -- Brice Goglin <bgoglin@debian.org>  Tue, 14 Aug 2007 00:09:52 +0200
+
 x11proto-input (1.4.2-1) unstable; urgency=low
 
   * New upstream release

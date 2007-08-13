@@ -15,9 +15,13 @@ Pre-Depends: x11-common (>= 1:7.0.0)
 Conflicts: libxi-dev (<< 6.8.2-16)
 Replaces: libxi-dev (<< 6.8.2-16)
 Description: X11 Input extension wire protocol
- This package provides the wire protocol for the Input extension, used to
- control all manner of options related to input device handling.
+ This package provides development headers describing the wire protocol
+ for the Input extension, used to control all manner of options related
+ to input device handling.
  .
  More information about X.Org can be found at:
+ <URL:http://www.X.org>
  <URL:http://xorg.freedesktop.org>
  <URL:http://lists.freedesktop.org/mailman/listinfo/xorg>
+ .
+ This package is built from the X.org inputproto proto module.
