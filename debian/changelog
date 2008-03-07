@@ -7,6 +7,10 @@ x11proto-input (1.4.3-1) UNRELEASED; urgency=low
 
   [ Julien Cristau ]
   * New upstream release.
+  * debian/control updates:
+    + add myself to Uploaders, and remove Branden with his permission
+    + bump Standards-Version to 3.7.3 (no changes)
+    + drop the XS- prefix from Vcs fields
 
  -- Brice Goglin <bgoglin@debian.org>  Tue, 14 Aug 2007 00:09:52 +0200
 
