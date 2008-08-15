@@ -30,21 +30,25 @@ else
 	confflags += --build=$(DEB_BUILD_GNU_TYPE) --host=$(DEB_HOST_GNU_TYPE)
 endif
 
-
-build: build-stamp
-build-stamp:
+configure: $(STAMP_DIR)/patch
 	dh_testdir
+	autoreconf -vfi
 
-	test -d obj-$(DEB_BUILD_GNU_TYPE) || mkdir obj-$(DEB_BUILD_GNU_TYPE)
+obj-$(DEB_BUILD_GNU_TYPE)/config.status: configure
+	dh_testdir
+	mkdir -p obj-$(DEB_BUILD_GNU_TYPE)
 	cd obj-$(DEB_BUILD_GNU_TYPE) && \
 	../configure --prefix=/usr --mandir=\$${prefix}/share/man \
 	             --infodir=\$${prefix}/share/info --disable-shared \
 	             $(confflags) CFLAGS="$(CFLAGS)" 
+
+build: build-stamp
+build-stamp: obj-$(DEB_BUILD_GNU_TYPE)/config.status
+	dh_testdir
 	cd obj-$(DEB_BUILD_GNU_TYPE) && $(MAKE)
+	>$@
 
-	touch build-stamp
-
-clean:
+clean: xsfclean
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp
@@ -54,6 +58,8 @@ clean:
 	rm -f conftest* */conftest*
 	rm -rf autom4te.cache */autom4te.cache
 	rm -rf obj-*
+	rm -f $$(find -name Makefile.in)
+	rm -f configure install-sh missing aclocal.m4
 
 	dh_clean
 

@@ -3,7 +3,7 @@ Section: x11
 Priority: optional
 Maintainer: Debian X Strike Force <debian-x@lists.debian.org>
 Uploaders: David Nusinow <dnusinow@debian.org>, Andres Salomon <dilinger@debian.org>, Drew Parsons <dparsons@debian.org>, Julien Cristau <jcristau@debian.org>
-Build-Depends: debhelper (>= 5)
+Build-Depends: debhelper (>= 5), automake, libtool, xutils-dev
 Standards-Version: 3.7.3
 Vcs-Git: git://git.debian.org/git/pkg-xorg/proto/x11proto-input
 Vcs-Browser: http://git.debian.org/?p=pkg-xorg/proto/x11proto-input.git
