@@ -1,4 +1,4 @@
-x11proto-input (1.4.4-1) UNRELEASED; urgency=low
+x11proto-input (1.4.4-1) unstable; urgency=low
 
   [ Timo Aaltonen ]
   * New upstream release.
@@ -8,7 +8,7 @@ x11proto-input (1.4.4-1) UNRELEASED; urgency=low
   [ Julien Cristau ]
   * debian/rules: allow parallel builds.
 
- -- Timo Aaltonen <tepsipakki@ubuntu.com>  Fri, 15 Aug 2008 15:27:35 +0300
+ -- Julien Cristau <jcristau@debian.org>  Thu, 28 Aug 2008 00:06:54 +0200
 
 x11proto-input (1.4.3-2) unstable; urgency=low
 
