@@ -1,6 +1,7 @@
 x11proto-input (1.5.0-1) UNRELEASED; urgency=low
 
   * New upstream release.
+  * Drop unused build-dep on libtool.
 
  -- Julien Cristau <jcristau@debian.org>  Fri, 19 Dec 2008 15:14:43 +0100
 
