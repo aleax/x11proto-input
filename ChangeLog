@@ -1,3 +1,11 @@
+commit 60c449cbb1769569ed5e98c75f26bd15627bd146
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Mon Dec 15 12:16:10 2008 +1000
+
+    Protect _XiDevicePresenceNotifyEvent declaration against C++ includes. #19075
+    
+    X.Org Bug 19075 <http://bugs.freedesktop.org/show_bug.cgi?id=19075>
+
 commit d38e79ca3ddd6031ca4a335eb2faf99294a6731f
 Author: Peter Hutterer <peter.hutterer@redhat.com>
 Date:   Wed Nov 26 21:37:06 2008 +1000

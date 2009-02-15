@@ -1,3 +1,10 @@
+x11proto-input (1.5.0-2) UNRELEASED; urgency=low
+
+  * Pull from upstream: Protect _XiDevicePresenceNotifyEvent declaration
+    against C++ includes.
+
+ -- Julien Cristau <jcristau@debian.org>  Sun, 15 Feb 2009 21:09:42 +0100
+
 x11proto-input (1.5.0-1) experimental; urgency=low
 
   * New upstream release.
