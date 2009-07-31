@@ -1,3 +1,9 @@
+x11proto-input (1.5.0-3) UNRELEASED; urgency=low
+
+  * Add README.source from xsfbs. Bump Standards-Version to 3.8.1.
+
+ -- Timo Aaltonen <tjaalton@ubuntu.com>  Fri, 31 Jul 2009 14:34:11 +0300
+
 x11proto-input (1.5.0-2) unstable; urgency=low
 
   * Pull from upstream: Protect _XiDevicePresenceNotifyEvent declaration
