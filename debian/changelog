@@ -1,4 +1,4 @@
-x11proto-input (1.9.99.902-1) UNRELEASED; urgency=low
+x11proto-input (1.9.99.902-1) experimental; urgency=low
 
   [ Timo Aaltonen ]
   * Add README.source from xsfbs. Bump Standards-Version to 3.8.1.
@@ -12,7 +12,7 @@ x11proto-input (1.9.99.902-1) UNRELEASED; urgency=low
   * Breaks libxi-dev << 1.2.99 to make sure XInput.h doesn't go missing.
   * Bump xutils-dev build-dep to 1:7.4+4.
 
- -- Timo Aaltonen <tjaalton@ubuntu.com>  Fri, 31 Jul 2009 14:34:11 +0300
+ -- Julien Cristau <jcristau@debian.org>  Sat, 12 Sep 2009 14:52:31 +0200
 
 x11proto-input (1.5.0-2) unstable; urgency=low
 
