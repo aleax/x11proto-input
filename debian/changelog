@@ -1,3 +1,9 @@
+x11proto-input (1.9.99.902-2) UNRELEASED; urgency=low
+
+  * Add Depends on x11proto-core-dev.
+
+ -- Julien Cristau <jcristau@debian.org>  Sat, 12 Sep 2009 14:58:22 +0200
+
 x11proto-input (1.9.99.902-1) experimental; urgency=low
 
   [ Timo Aaltonen ]

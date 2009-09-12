@@ -13,7 +13,7 @@ Vcs-Browser: http://git.debian.org/?p=pkg-xorg/proto/x11proto-input.git
 
 Package: x11proto-input-dev
 Architecture: all
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, x11proto-core-dev
 Breaks: libxi-dev (<< 2:1.2.99)
 Description: X11 Input extension wire protocol
  This package provides development headers describing the wire protocol
