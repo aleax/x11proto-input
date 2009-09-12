@@ -1,6 +1,11 @@
 x11proto-input (1.5.0-3) UNRELEASED; urgency=low
 
+  [ Timo Aaltonen ]
   * Add README.source from xsfbs. Bump Standards-Version to 3.8.1.
+
+  [ Julien Cristau ]
+  * Drop Pre-Depends on x11-common and Conflicts/Replaces on libxi-dev.  This
+    was only needed for upgrades from sarge.
 
  -- Timo Aaltonen <tjaalton@ubuntu.com>  Fri, 31 Jul 2009 14:34:11 +0300
 
