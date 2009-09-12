@@ -9,6 +9,7 @@ x11proto-input (1.9.99.902-1) UNRELEASED; urgency=low
   * Bump Standards-Version to 3.8.3.
   * New upstream release candidate
     + XInput.h moved to libXi
+  * Breaks libxi-dev << 1.2.99 to make sure XInput.h doesn't go missing.
 
  -- Timo Aaltonen <tjaalton@ubuntu.com>  Fri, 31 Jul 2009 14:34:11 +0300
 
