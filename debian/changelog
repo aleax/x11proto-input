@@ -1,4 +1,4 @@
-x11proto-input (1.5.0-3) UNRELEASED; urgency=low
+x11proto-input (1.9.99.902-1) UNRELEASED; urgency=low
 
   [ Timo Aaltonen ]
   * Add README.source from xsfbs. Bump Standards-Version to 3.8.1.
@@ -7,6 +7,8 @@ x11proto-input (1.5.0-3) UNRELEASED; urgency=low
   * Drop Pre-Depends on x11-common and Conflicts/Replaces on libxi-dev.  This
     was only needed for upgrades from sarge.
   * Bump Standards-Version to 3.8.3.
+  * New upstream release candidate
+    + XInput.h moved to libXi
 
  -- Timo Aaltonen <tjaalton@ubuntu.com>  Fri, 31 Jul 2009 14:34:11 +0300
 
