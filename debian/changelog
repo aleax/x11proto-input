@@ -5,6 +5,7 @@ x11proto-input (2.0-1) UNRELEASED; urgency=low
 
   [ Timo Aaltonen ]
   * New upstream release.
+  * Bump the build-dep on xutils-dev (>= 1:7.5~1).
 
  -- Julien Cristau <jcristau@debian.org>  Sat, 12 Sep 2009 14:58:22 +0200
 
