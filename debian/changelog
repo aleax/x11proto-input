@@ -2,6 +2,7 @@ x11proto-input (2.0-1) UNRELEASED; urgency=low
 
   [ Julien Cristau ]
   * Add Depends on x11proto-core-dev.
+  * Install the XI1 and XI2 specs in the package.
 
   [ Timo Aaltonen ]
   * New upstream release.
