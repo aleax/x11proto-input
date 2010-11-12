@@ -8,6 +8,7 @@ x11proto-input (2.0.1-1) UNRELEASED; urgency=low
   [ Cyril Brulebois ]
   * New upstream release.
   * No longer pass --disable-shared, this option is gone.
+  * Ship XIproto.txt and XI2proto.txt
 
  -- Cyril Brulebois <kibi@debian.org>  Fri, 12 Nov 2010 17:01:12 +0100
 
