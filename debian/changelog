@@ -1,4 +1,4 @@
-x11proto-input (2.0.1-1) UNRELEASED; urgency=low
+x11proto-input (2.0.1-1) unstable; urgency=low
 
   [ Julien Cristau ]
   * Rename the build directory to not include DEB_BUILD_GNU_TYPE for no
@@ -13,7 +13,7 @@ x11proto-input (2.0.1-1) UNRELEASED; urgency=low
   * Switch from --list-missing to --fail-missing for additional safety.
   * Add myself to Uploaders.
 
- -- Cyril Brulebois <kibi@debian.org>  Fri, 12 Nov 2010 17:01:12 +0100
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 12 Nov 2010 17:08:10 +0100
 
 x11proto-input (2.0-2) unstable; urgency=low
 
