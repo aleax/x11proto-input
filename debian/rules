@@ -40,7 +40,7 @@ build/config.status: configure
 	mkdir -p build
 	cd build && \
 	../configure --prefix=/usr --mandir=\$${prefix}/share/man \
-	             --infodir=\$${prefix}/share/info --disable-shared \
+	             --infodir=\$${prefix}/share/info \
 	             $(confflags) CFLAGS="$(CFLAGS)" 
 
 build: build-stamp
