@@ -1,4 +1,4 @@
-x11proto-input (2.0.2-1) UNRELEASED; urgency=low
+x11proto-input (2.0.2-1) unstable; urgency=low
 
   * New upstream release.
   * Switch to dh:
@@ -11,7 +11,7 @@ x11proto-input (2.0.2-1) UNRELEASED; urgency=low
   * Wrap (Build-)Depends.
   * Bump Standards-Version (no changes).
 
- -- Cyril Brulebois <kibi@debian.org>  Thu, 09 Jun 2011 15:09:41 +0200
+ -- Cyril Brulebois <kibi@debian.org>  Thu, 09 Jun 2011 15:30:57 +0200
 
 x11proto-input (2.0.1-1) unstable; urgency=low
 
