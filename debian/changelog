@@ -8,6 +8,7 @@ x11proto-input (2.0.2-1) UNRELEASED; urgency=low
   * Get rid of xsfbs accordingly.
   * Update Uploaders list. Thanks, David and Andres!
   * Get rid of old Breaks on libxi-dev, even squeeze has a higher version.
+  * Wrap (Build-)Depends.
 
  -- Cyril Brulebois <kibi@debian.org>  Thu, 09 Jun 2011 15:09:41 +0200
 
