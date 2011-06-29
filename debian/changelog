@@ -1,7 +1,7 @@
 x11proto-input (2.0.2-2) unstable; urgency=low
 
   * Mark x11proto-input-dev Multi-Arch: foreign
-  * Install .pc file to /usr/share/pkgconfig insetad of
+  * Install .pc file to /usr/share/pkgconfig instead of
     /usr/lib/pkgconfig
 
  -- Steve Langasek <vorlon@debian.org>  Fri, 17 Jun 2011 08:56:37 -0700
