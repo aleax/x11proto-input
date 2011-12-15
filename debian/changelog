@@ -1,6 +1,7 @@
 x11proto-input (2.1-1) UNRELEASED; urgency=low
 
   * New upstream release.
+  * Bump xutils-dev build-dep for new macros, add asciidoc build-dep.
 
  -- Cyril Brulebois <kibi@debian.org>  Fri, 16 Dec 2011 13:17:14 +0100
 
