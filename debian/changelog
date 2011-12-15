@@ -4,6 +4,8 @@ x11proto-input (2.1.99.3-1) UNRELEASED; urgency=low
     - With multitouch support.
   * Pass --enable-unstable-protocol to configure accordingly.
   * Bump xutils-dev build-dep for new macros, add asciidoc build-dep.
+  * Get rid of .docs, XI{,2}proto.txt were already listed in .install; and
+    add XI{,2}proto.html there accordingly (thanks, asciidoc).
 
  -- Cyril Brulebois <kibi@debian.org>  Thu, 15 Dec 2011 13:53:23 +0100
 
