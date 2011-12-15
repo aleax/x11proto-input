@@ -3,6 +3,7 @@ x11proto-input (2.1.99.3-1) UNRELEASED; urgency=low
   * New upstream release candidate:
     - With multitouch support.
   * Pass --enable-unstable-protocol to configure accordingly.
+  * Bump xutils-dev build-dep for new macros, add asciidoc build-dep.
 
  -- Cyril Brulebois <kibi@debian.org>  Thu, 15 Dec 2011 13:53:23 +0100
 
