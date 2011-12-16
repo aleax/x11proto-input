@@ -1,12 +1,259 @@
-commit 84479bf87230905cd26d8395577058950230c103
+commit 8640944f4ff193027ce0f21622918b88da910e72
 Author: Peter Hutterer <peter.hutterer@who-t.net>
-Date:   Tue Jun 7 14:16:17 2011 +1000
+Date:   Fri Dec 16 11:06:13 2011 +1000
 
-    inputproto 2.0.2
+    inputproto 2.1
     
     Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
 
-commit 3686697eb5a330deb222b5e95843f23037ca3faf
+commit 019a252a59c1d076b07a0162cb3ee6af42ceea14
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Dec 2 15:03:46 2011 +1000
+
+    specs: typo fix
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit a9fcea66eb18fab330f3b27b3daedef2b5c9210a
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Nov 11 14:33:34 2011 +1000
+
+    specs: smooth scrolling was added in 2.1, say so
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 279524b089c7b42871ee072cfc03a1fad7421b7b
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Nov 8 15:36:02 2011 +1000
+
+    specs: scroll events have no specific event type, state so.
+    
+    This wasn't clear enough in the current spec.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 9f2b1a33063b139756e08951affe802e8af39a76
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Nov 8 15:29:24 2011 +1000
+
+    specs: We're up to version 2.1 now, say so
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 463ffaabab506ad6ddb3b55c5781ae91fcccfd04
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Sep 23 08:41:18 2011 +1000
+
+    specs: clarify that Preferred scroll valuators are per scroll direction
+    
+    Reported-by: Daniel Stone <daniel@fooishbar.org>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 9cfdeedd16e96c0e67e70537e97a8f8dd0358244
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Thu Jun 2 16:09:23 2011 +1000
+
+    inputproto 2.0.99.1 (first snapshot of 2.1)
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Jeremy Huddleston <jeremyhu@apple.com>
+    Reviewed-by: Daniel Stone <daniel@fooishbar.org>
+
+commit 7d5a303cd8976a7eac1b96897c70d5d25c57ecf1
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Mon Aug 15 12:33:04 2011 +1000
+
+    Move scroll information into a new class.
+    
+    Using labels only to mark smooth scrolling axes disallows scrolling from
+    hardware events (e.g. a mouse wheel). If those axes are marked as scrolling
+    axes instead, the clients lose information which hardware axis this event
+    corresponds to.
+    
+    For example, on Wacom devices, the client can benefit from smooth scrolling
+    on the strip or wheel event but may still require the knowledge whether the
+    axis is a vertical strip (e.g. Intuos3) or a absolute scrolling wheel (e.g.
+    Intuos4).
+    
+    Thus, add a new class to XIQueryDevice that represents scrolling information
+    on a valuator. One of these ScrollClass may exist for each ValuatorClass if
+    that valuator is a scrolling valuator. The increment field of this class
+    removes the requirement for 1.0 == 1 unit of scrolling.
+    
+    This isn't true in most cases, especially where physical scroll axes are
+    involved. Wacom Intuos4 scroll rings have a unit size of 3.0 and the driver
+    historically sent one scroll event per 3.0 increment or decrement. Mapping
+    one scroll event to 1.0 makes the ring mostly unusable through legacy
+    button events.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 186aa20619d1720bde49fd92d2834c8f9eadf49b
+Author: Daniel Stone <daniel@fooishbar.org>
+Date:   Wed Feb 23 17:37:29 2011 +0000
+
+    Document smooth-scrolling support
+    
+    Two new axes are added to support smooth scrolling: Rel Vert Scroll and
+    Rel Horiz Scroll.  Cumulative values of 1.0 with either magnitude on
+    these axes are considered to be equivalent to one legacy ButtonPress
+    event on the scroll buttons.
+    
+    Signed-off-by: Daniel Stone <daniel@fooishbar.org>
+    Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 53b58e679f977550301130794c8cb19391ecceb7
+Author: Daniel Stone <daniel@fooishbar.org>
+Date:   Tue Feb 15 14:27:53 2011 +0000
+
+    Add XIPointerEmulated for emulated events
+    
+    The XIPointerEmulated flag on pointer events means that the event was
+    emulated from a smooth-scroll or touch event to support legacy events,
+    and the client may ignore this if it is listening to the other events.
+    
+    Signed-off-by: Daniel Stone <daniel@fooishbar.org>
+    Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit af1fb609beece899188469a81ac9d8c5e07bfa4a
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Jul 29 10:09:02 2011 +1000
+
+    Add sourceid to RawEvents (#34420)
+    
+    RawEvents in XI2 do not provide the source ID. The libXi headers however do
+    and it is currently always 0. Given that the sourceid may be useful for
+    some clients, send it down the wire.
+    
+    This has no effect on the wire size of the struct, we can re-use a pad byte
+    here.
+    
+    X.Org Bug 34420 <http://bugs.freedesktop.org/show_bug.cgi?id=34420>
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Daniel Stone <daniel@fooishbar.org>
+
+commit 1e63d01d041108db6fe5be32d033e80419a6ab05
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Apr 12 13:07:53 2011 +1000
+
+    XI2.1: send RawEvents at all times.
+    
+    When a client grabbed a device, XI 2.0 only sends RawEvents to that client.
+    This behaviour is problematic and cannot be worked around for many
+    applications that need to continue receiving events.
+    
+    On the other hand, no client seems to rely on this behaviour or use it to
+    its advantage. For XI 2.1, disable this behaviour and continue to send raw
+    events regardless of the grab state of the device.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Acked-by: Chase Douglas <chase.douglas@canonical.com>
+    Reviewed-by: Daniel Stone <daniel@fooishbar.org>
+    Reviewed-by: Jeremy Huddleston <jeremyhu@apple.com>
+
+commit b35f20b7bd9620710a7a6b63e39758fe83b4dec8
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Apr 8 13:26:27 2011 +1000
+
+    Announce 2.1 availability through the XI_2_Major and XI_2_Minor defines
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 47a2cc250398648732ba2086ca6ecb21e7dabdc0
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Apr 8 12:59:17 2011 +1000
+
+    Bump to 2.0.99
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 94b21b47b51c2c66aa0372dfc323d6aedf12b549
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Aug 23 15:28:50 2011 +1000
+
+    specs: fix two typos in XI2proto.txt
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 9f33733fffddd166c64f0bfd293c3de385cf4411
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Aug 17 16:02:39 2011 +1000
+
+    specs: ValuatorClass includes a mode
+    
+    Documented in the description, but missing in the definition.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Daniel Stone <daniel@fooishbar.org>
+
+commit 2ba875f4f2907bb9735ee3317b7e07c5b9d1304b
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Aug 2 10:20:53 2011 +1000
+
+    Put a warning in about not adding any further libXi defines
+    
+    The matching commit in libXi is
+        e8531dd6a981c6cf19a1d256c29e886e34e8f51a
+        libXi-1.4.2-21-ge8531ddp
+    
+        Add XI2 library-internal array offsets to XIint.h
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit ee91dcda461513cdca45160df580841daa6f50e2
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Thu Mar 17 16:29:08 2011 +1000
+
+    specs: add a linebreak for asciidoc parsing
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 2cd2adb7a454072954704e1a215df49ce9dac410
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Jun 3 15:56:21 2011 +1000
+
+    Provide convenience defines for owner_events.
+    
+    No functional effect, just to improve readability of code.
+    
+    It's not obvious what "True" or "False" stands for in a function with 11
+    arguments. Compare
+        XIGrabButton(dpy, deviceid, button, grab_window, cursor,
+                     GrabModeAsync, GrabModeSync, True,
+                     event_mask, num_modifiers, &modifiers);
+    
+    vs.
+    
+    XIGrabButton(dpy, deviceid, button, grab_window, cursor,
+                 GrabModeAsync, GrabModeSync, XIOwnerEvents,
+                 event_mask, num_modifiers, &modifiers);
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Daniel Stone <daniel@fooishbar.org>
+
+commit bef7648827a0696debdd629472a45508a30144b1
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Jun 3 15:13:12 2011 +1000
+
+    Add XI2-specific defines for grab and property requests
+    
+    XI 2.0 headers forced clients to mix XI2 specific constants with defines for
+    core input. Most notable here are the grab code which required GrabModeAsync
+    or GrabModeSync from core, but _not_ AnyModifier (XIAnymodifier !=
+    AnyModifier). This is a hard-to-debug cause for bugs.
+    
+    Add defines for grab modes, grab return codes and property modes as well as
+    a define for the AnyPropertyType. These defines are identical to the ones
+    defined in core but stop the use of input-related defines from either core
+    or XI 1.x.
+    
+    Clients must use the core defines None and CurrentTime where applicable.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Daniel Stone <daniel@fooishbar.org>
+
+commit b1149ab782619eaeadf70affd94239184e082d03
 Author: Alexandre Julliard <julliard@winehq.org>
 Date:   Tue Apr 12 22:39:25 2011 +0200
 
@@ -17,9 +264,78 @@ Date:   Tue Apr 12 22:39:25 2011 +0200
     
     Signed-off-by: Alexandre Julliard <julliard@winehq.org>
     Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
-    (cherry picked from commit b1149ab782619eaeadf70affd94239184e082d03)
 
-commit a4cab7946409613e27fbad195c861224ad0e0b10
+commit ab930a51047f48c7befd4316a9b116f37075697f
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Mar 23 13:27:02 2011 +1000
+
+    specs: enable asciidoc parsing for XIproto.txt
+    
+    The vast majority of this patch are indentation changes, removing preceding
+    spaces from text.
+    Header lines  and some linebreaks to enable list parsing were added.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Gaetan Nadon <memsize@videotron.ca>
+
+commit ef7518cc6260e05a00c496c9e0f3a13c8a785b85
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Mar 23 13:32:42 2011 +1000
+
+    specs: move erroneous Errors: line to where it belongs
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Julien Cristau <jcristau@debian.org>
+
+commit 47901cd142e832eb930166cbfa769e4fbca969c5
+Author: Gaetan Nadon <memsize@videotron.ca>
+Date:   Tue Mar 15 21:37:39 2011 -0400
+
+    XIproto.txt: fix whitespace issues
+    
+    Signed-off-by: Gaetan Nadon <memsize@videotron.ca>
+
+commit 5f43b8b19e6abd00a6295692f3346295bb01b973
+Author: Gaetan Nadon <memsize@videotron.ca>
+Date:   Tue Mar 15 21:29:43 2011 -0400
+
+    XI2proto.txt: fix whitespace issues
+    
+    Signed-off-by: Gaetan Nadon <memsize@videotron.ca>
+
+commit 0ac450f47c55fb2bac394f6377f1aabde1ab8429
+Author: Gaetan Nadon <memsize@videotron.ca>
+Date:   Tue Mar 15 15:43:48 2011 -0400
+
+    specs: convert XI2proto.txt to html using asciidoc
+    
+    Signed-off-by: Gaetan Nadon <memsize@videotron.ca>
+
+commit f21f00bd9b8e641d639d70d086df1b14faa34e38
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Mar 16 09:57:10 2011 +1000
+
+    Add minimal asciidoc syntax
+    
+    Though this protocol description is mainly to be viewed as textfile, a few
+    minor changes make it parsable for asciidoc to spit out reasonably
+    nicely-formatted html code.
+    
+    Changes include:
+    - underline section headers with the matching lines
+    - add linebreaks before lists to parse them as lists
+    - change indentation level for normal text to be left-marging aligned and
+      for <pre> text to be indented
+    - comment out section dividers
+    
+    It's possible to run asciidoc XI2proto.txt and get some nice html output
+    now.
+    
+    Reviewed-by: Gaetan Nadon <memsize@videotron.ca>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 13baef91f071ee1607f4c3bf6c1fea60e6651b89
 Author: Fernando Carrijo <fcarrijo@freedesktop.org>
 Date:   Thu Jan 27 22:40:11 2011 -0200
 
@@ -27,9 +343,8 @@ Date:   Thu Jan 27 22:40:11 2011 -0200
     
     Signed-off-by: Fernando Carrijo <fcarrijo@freedesktop.org>
     Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
-    (cherry picked from commit 13baef91f071ee1607f4c3bf6c1fea60e6651b89)
 
-commit bf66a58ddb0a39eb4a0ae8e58160780f8a2b2716
+commit 5c2d5fd99d73ae52aef62376046b5708c58a4271
 Author: Chase Douglas <chase.douglas@ubuntu.com>
 Date:   Fri Dec 17 17:11:09 2010 +0000
 
@@ -41,7 +356,6 @@ Date:   Fri Dec 17 17:11:09 2010 +0000
     Signed-off-by: Chase Douglas <chase.douglas@canonical.com>
     Signed-off-by: Daniel Stone <daniel@fooishbar.org>
     Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
-    (cherry picked from commit 5c2d5fd99d73ae52aef62376046b5708c58a4271)
 
 commit 56ffb564712257e0f998170e83071a6ee85aa231
 Author: Peter Hutterer <peter.hutterer@who-t.net>
