@@ -1,11 +1,11 @@
-x11proto-input (2.1-1) UNRELEASED; urgency=low
+x11proto-input (2.1-1) unstable; urgency=low
 
   * New upstream release.
   * Bump xutils-dev build-dep for new macros, add asciidoc build-dep.
   * Get rid of .docs, XI{,2}proto.txt were already listed in .install; and
     add XI{,2}proto.html there accordingly (thanks, asciidoc).
 
- -- Cyril Brulebois <kibi@debian.org>  Fri, 16 Dec 2011 13:17:14 +0100
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 16 Dec 2011 13:24:03 +0100
 
 x11proto-input (2.0.2-2) unstable; urgency=low
 
