@@ -1,9 +1,9 @@
-x11proto-input (2.1.99.4-1) UNRELEASED; urgency=low
+x11proto-input (2.1.99.4-1) experimental; urgency=low
 
   * New upstream release candidate.
   * Remove --enable-unstable-protocol, no longer needed.
 
- -- Cyril Brulebois <kibi@debian.org>  Wed, 21 Dec 2011 09:38:20 +0100
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 21 Dec 2011 09:41:06 +0100
 
 x11proto-input (2.1.99.3-1) experimental; urgency=low
 
