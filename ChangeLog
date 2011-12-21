@@ -1,3 +1,120 @@
+commit b9f1b26f076cdba373e8b7a0b73384b35e8d799c
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Dec 21 15:30:22 2011 +1000
+
+    inputproto 2.1.99.4
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit b4da32ed2856fef3e8135f03c9194f9dd0287f66
+Merge: 8640944 c508e93
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Dec 21 15:28:44 2011 +1000
+
+    Merge branch 'multitouch-devel'
+    
+    Conflicts:
+    	configure.ac
+    	specs/XI2proto.txt
+
+commit c508e9360414f9724cc875a4731a5fd8a3969d2b
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Dec 21 15:27:47 2011 +1000
+
+    specs: add XI 2.1 release to history section
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 5c9a6569e5182a4c4c6ec052bcd76a9ca3b8f645
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Dec 21 15:24:44 2011 +1000
+
+    Remove --enable-unstable-protocol configure option
+    
+    Protocol is reasonably stable and about to be merged onto the master
+    branch. People should be used to stuff on master being a tad unstable, don't
+    require any specific configure flags.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit aef700dbac09d3c8a576387be47e5693460f1393
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Dec 21 15:23:23 2011 +1000
+
+    specs: remove parts of the "Work in progress" warning
+    
+    The protocol is stable enough now that a simple warning should be enough.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 9a9746b95f3585bba9730105769e9c74520f6bc4
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Dec 20 08:23:55 2011 +1000
+
+    Reinstate libXi's version defines
+    
+    Realistically, we can't remove these from the protocol without breaking
+    older libraries.
+    
+    Introduced in a02566ca7fd37d279b957037e1251a3b3419866d
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+    Signed-off-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit ee0bc61ee3fd775127f8cd222d83314f66255f2b
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Dec 20 08:22:52 2011 +1000
+
+    Drop wrong comment for sourceid in TouchOwnershipEvents
+    
+    Copy/paste error from DeviceChangedEvent
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+    Signed-off-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 8640944f4ff193027ce0f21622918b88da910e72
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Dec 16 11:06:13 2011 +1000
+
+    inputproto 2.1
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit b701750ee99e1e227ad8baa994b6fd3398949a3a
+Author: Cyril Brulebois <kibi@debian.org>
+Date:   Thu Dec 15 17:07:54 2011 +0100
+
+    specs: Fix tiny typo.
+    
+    Signed-off-by: Cyril Brulebois <kibi@debian.org>
+    Reviewed-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 8687f155d8072763c2c7d52cb48eb5f46bfaf705
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Dec 14 08:56:59 2011 +1000
+
+    specs: clarify button state in touch events
+    
+    Emulated pointer events will have button 1 logically down, but touch events
+    only represent the actual button state, irrespective of the touches.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+    Signed-off-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit b1d71fe4cd3871a78e442159443c141193e79a7f
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Dec 14 08:56:09 2011 +1000
+
+    specs: drop leftover from active_touches removal
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+    Signed-off-by: Chase Douglas <chase.douglas@canonical.com>
+
 commit 02eadf00f07abb9b0f19a05728b70e42eac08adb
 Author: Chase Douglas <chase.douglas@canonical.com>
 Date:   Tue Dec 13 10:35:18 2011 -0800
@@ -53,11 +170,45 @@ Date:   Mon Dec 12 10:26:20 2011 +1000
     Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
     Signed-off-by: Chase Douglas <chase.douglas@canonical.com>
 
+commit 019a252a59c1d076b07a0162cb3ee6af42ceea14
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Dec 2 15:03:46 2011 +1000
+
+    specs: typo fix
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit a9fcea66eb18fab330f3b27b3daedef2b5c9210a
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Nov 11 14:33:34 2011 +1000
+
+    specs: smooth scrolling was added in 2.1, say so
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
 commit c9c4e13e8a3eb90b45c5ef65f729089b7f742e6a
 Author: Peter Hutterer <peter.hutterer@who-t.net>
 Date:   Fri Nov 11 14:22:08 2011 +1000
 
     inputproto 2.1.99.2
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 279524b089c7b42871ee072cfc03a1fad7421b7b
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Nov 8 15:36:02 2011 +1000
+
+    specs: scroll events have no specific event type, state so.
+    
+    This wasn't clear enough in the current spec.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 9f2b1a33063b139756e08951affe802e8af39a76
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Nov 8 15:29:24 2011 +1000
+
+    specs: We're up to version 2.1 now, say so
     
     Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
 
@@ -88,6 +239,15 @@ Date:   Thu Nov 3 09:30:20 2011 +1000
     Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
     Reviewed-by: Jeremy Huddleston <jeremyhu@apple.com>
     Signed-off-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 463ffaabab506ad6ddb3b55c5781ae91fcccfd04
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Sep 23 08:41:18 2011 +1000
+
+    specs: clarify that Preferred scroll valuators are per scroll direction
+    
+    Reported-by: Daniel Stone <daniel@fooishbar.org>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
 
 commit cec7567863c3d363b6b75c707540cfe524f849ba
 Author: Chase Douglas <chase.douglas@canonical.com>
