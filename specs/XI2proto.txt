@@ -4,18 +4,6 @@ The X Input Extension 2.x
 :numbered:
 
 .This is a work in progress!
-*****************************************************************************
-While XI 2.0 is final and widely deployed, XI 2.1 is still a work in progress;
-the protocol is not final and is subject to change at any time. While testing
-and feedback is strongly encouraged and very much welcome, please be aware that
-any part of the XI 2.1 additions may change from underneath you. We strongly
-recommend against deploying it in production for this reason.
-
-Developing against XI 2.1 requires passing the --enable-unstable-protocol
-argument when building inputproto, and additionally defining
-XINPUT2_1_USE_UNSTABLE_PROTOCOL when building your applications. I'm sure you
-get the point by now, so I promise not to mention it again.
-*****************************************************************************
 
 Authors:
 
@@ -28,6 +16,8 @@ History
 -------
 
 - v2.2, ??: Multitouch support added
+- v2.1, December 2011: new raw event behaviour, smooth scrolling support
+  added
 - v2.0, October 2009: Initial release of XI2 protocol
 
 [[intro-xi20]]
@@ -61,6 +51,7 @@ device information in each event (with the exception of core events).
 Changes introduced by version 2.1
 
 - RawEvents are sent regardless of the grab state.
+- Addition of the ScrollClass for smooth scrolling
 
 2.2 Changes
 -----------
@@ -190,13 +181,14 @@ simply dragging your finger along a designated strip along the side of the
 touchpad.
 
 Newer X servers may provide scrolling information through valuators to
-provide scroll events with more precision than the button events. Valuators
-for axes sending scrolling information must have one ScrollClass for each
-scrolling axis.
+provide clients with more precision than the legacy button events. This
+scrolling information is part of the valuator data in device events.
+Scrolling events do not have a specific event type.
 
-If scrolling valuators are present on a device, the server must provide
-two-way emulation between these valuators and the legacy button events for
-each delta unit of scrolling.
+Valuators for axes sending scrolling information must have one
+ScrollClass for each scrolling axis. If scrolling valuators are present on a
+device, the server must provide two-way emulation between these valuators
+and the legacy button events for each delta unit of scrolling.
 
 One unit of scrolling in either direction is considered to be equivalent to
 one button event, e.g. for a unit size of 1.0, -2.0 on an valuator type
@@ -210,10 +202,11 @@ with the XIPointerEmulated flag for DeviceEvents, and the XIRawEmulated flag
 for raw events, to hint at applications which event is a hardware event.
 
 If more than one scroll valuator of the same type is present on a device,
-the valuator marked with Preferred is used to convert legacy button events
-into scroll valuator events. If no valuator is marked Preferred or more than
-one valuator is marked with Preferred, this should be considered a driver
-bug and the behaviour is implementation-dependent.
+the valuator marked with Preferred for the same scroll direction is used to
+convert legacy button events into scroll valuator events. If no valuator is
+marked Preferred or more than one valuator is marked with Preferred for this
+scroll direction, this should be considered a driver bug and the behaviour
+is implementation-dependent.
 
 [[hierachy]]
 The Master/Slave device hierarchy
@@ -282,7 +275,7 @@ The ClientPointer principle
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Many core protocol and some extension requests are ambiguous when multiple
-master devices are available (e.g. QueryPointer does not specfy which pointer).
+master devices are available (e.g. QueryPointer does not specify which pointer).
 The X server does not have the knowledge to chose the contextually correct
 master device. For each client, one master pointer is designated as this
 clients's "ClientPointer". Whenever a client sends an ambiguous request (e.g.
@@ -467,10 +460,12 @@ Pointer events are emulated as follows:
   touch with the same axis values of the touch event, followed by a button press
   event for button 1.
 - A TouchUpdate event generates a pointer motion event to the location of the
-  touch and/or to update axis values of the pointer device.
+  touch and/or to update axis values of the pointer device. The button state
+  as seen from the protocol includes button 1 set.
 - A TouchEnd event generates a pointer motion event to the location of the touch
   and/or to update the axis values if either have changed, followed by a button
-  release event for button 1.
+  release event for button 1. The button state as seen from the protocol
+  includes button 1 set.
 
 If a touch sequence emulates pointer events and an emulated pointer event
 triggers the activation of a passive grab, the grabbing client becomes the
@@ -2112,11 +2107,6 @@ KeyRelease, ButtonPress, ButtonRelease, Motion.
         further TouchUpdate events once an event with TouchPendingEnd has been
         received.
 
-The active_touches value denotes the number of touches in contact with
-the source touch device surface when the event occurred. The value
-includes the new touch for a TouchBegin event, and does not include the
-ending touch for a TouchEnd event.
-
 Modifier state in mods is detailed as follows:
 
     base_mods
@@ -2154,6 +2144,9 @@ value for each new touch, wrapping back to 0 upon reaching the numerical limit
 of IDs. The increment between two touch IDs is indeterminate. Clients may not
 assume that any future touches will have specific touch IDs. IDs are globally
 unique.
+
+The button state in touch events represents the state of the device's
+physical buttons only, even if that sequence is emulating pointer events.
 
 Touch events do not generate enter/leave events.
 
@@ -2390,7 +2383,7 @@ require the client to announce XI 2.2 support in the XIQueryVersion request.
    considered the owner of the event.  C receives a TouchBegin event, but does
    not receive a TouchOwnership event.
 ** When the touchpoint moves, C will receive a TouchUpdate event.  Event
-   delivery to I is be subject to the synchronous delivery mechanism. The
+   delivery to I is subject to the synchronous delivery mechanism. The
    emulated motion notify event is queued in the server while the device is
    frozen.
 ** I may assert ownership by calling XIAllowEvents on Y with any mode other
