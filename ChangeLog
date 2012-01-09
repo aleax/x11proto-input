@@ -1,3 +1,66 @@
+commit 1306ccf9f262c0c699bec093ffdc4b6695601599
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Jan 6 13:35:25 2012 +1000
+
+    inputproto 2.1.99.5
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 997ae0343730c66d581fd147741cbe27fbe55af2
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Jan 3 09:26:22 2012 +1000
+
+    Set a flag on the pointer-emulating touch event
+    
+    Toolkits need to know which touch event emulated a pointer event and which
+    ones do not. To quote Carlos Garnacho:
+    
+        GTK+ does client-side windows by default (GdkWindows without a backing X
+        window), for this to work the toplevel window in the client needs to
+        select for more events that it wouldn't normally select for in order to
+        cater for the event masks in such child "windows". This means that
+        ideally GTK+ should set the touch events mask in the toplevel, and then
+        find out whether the "window" would receive pointer or touch events for
+        the sequence emulating the pointer, and perform the emulation itself.
+    
+    Reported-by: Carlos Garnacho <carlosg@gnome.org>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit 5ee845c1bf457159a034111c3d0df584aa600cd6
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Jan 3 09:24:38 2012 +1000
+
+    specs: purge leftover TouchAccepted note
+    
+    This flag does not exist anymore.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit e65ba758c2d4147c3873c63c262db36ec23bba63
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Tue Jan 3 09:23:23 2012 +1000
+
+    specs: only pointer events have a PointerEmulated flag
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 9611be0a5bc7f4d583d49d51a0e98d3b9b75fc7a
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Dec 23 18:03:09 2011 +1000
+
+    specs: Clarify rejection for touch events on current owner
+    
+    The current owner never gets a TouchUpdate(PendingEnd), that event is
+    superfluous for the owner. The owner receives a TouchEnd when the touch
+    physically ends. If the touch is still active, the owner receives a
+    TouchEnd after rejecting the touch.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
 commit b9f1b26f076cdba373e8b7a0b73384b35e8d799c
 Author: Peter Hutterer <peter.hutterer@who-t.net>
 Date:   Wed Dec 21 15:30:22 2011 +1000
