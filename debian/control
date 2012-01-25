@@ -19,6 +19,7 @@ Depends:
  ${shlibs:Depends},
  ${misc:Depends},
  x11proto-core-dev,
+Multi-Arch: foreign
 Description: X11 Input extension wire protocol
  This package provides development headers describing the wire protocol
  for the Input extension, used to control all manner of options related
