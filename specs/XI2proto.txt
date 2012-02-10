@@ -31,7 +31,8 @@ XI2 provides a number of enhancements over version 1.5, including:
 
 - use of XGE and GenericEvents. GenericEvents are of flexible length with a
   minimum length of 32 bytes.
-- explicit device hierarchy of master and slave devices. See Section 4.
+- explicit device hierarchy of master and slave devices. See Section
+<<hierachy,The Master/Slave device hierarchy>>.
 - use of multiple independent master devices (Multi-Poiner X or MPX).
 - the ability for devices to change capabilities at runtime.
 - raw device events
@@ -46,55 +47,22 @@ used on applications employing the core protocol. XI2 addresses both of these
 issues by enabling devices to be both extended and core devices and providing
 device information in each event (with the exception of core events).
 
-2.1 Changes
------------
-Changes introduced by version 2.1
+Changes in version 2.1
+----------------------
 
 - RawEvents are sent regardless of the grab state.
 - Addition of the ScrollClass for smooth scrolling
 
-2.2 Changes
------------
-Changes introduced by version 2.2
+Changes in version 2.2
+----------------------
 
-XI 2.2 introduces support for multi-touch devices. The traditional
-pointer/keyboard approach enforced by XI 2.0 with the master/slave device
-hierarchy is not always suitable for multi-touch devices that can provide a
-dynamic number of touchpoints per physical device; it is not known without
-client-specific interpretation whether the touchpoints must be considered
-separately or grouped together.
+- Multitouch support added
 
-The additions in XI 2.2 aim to:
-
-- support a dynamic number of simultaneous touch points,
-- support devices that are both multi-touch and traditional pointer devices,
-- allow touchpoints to be either grouped together or handled separately,
-- while supporting pre-XI 2.2 clients through emulation of XI 2.x/XI 1.x and core
-- be backwards-compatible to pre-XI 2.2 clients through emulation of XI 2.x/XI 1.x and core
-  pointer events.
-
-XI 2.2 caters for two modes of touch input devices:
-
-- 'Direct' multi-touch input devices such as touchscreens. These devices
-  provide independent touchpoints that can occur anywhere on the screen;
-  "direct" here refers to the user manipulating objects at their screen
-  location, e.g. touching an object and physically moving it.
-- 'Dependent' touch input devices such as multi-touch trackpads and mice with
-  additional touch surfaces. These devices provide independent touchpoints that
-  often need to be interpreted relative to the current position of the cursor
-  on that same device. Such interactions are usually the result of a gesture
-  performed on the device, rather than direct manipulation.
-
-Touch events are only available to clients supporting version 2.2 or later of
-the X Input Extension. Clients must use the XIQueryVersion request to announce
-support for this version. Touch devices may generate emulated pointer events
-alongside XI 2.2 touch events to support older clients; see Section
-<<multitouch-processing,Touch event delivery>>.
 
 //                            ❧❧❧❧❧❧❧❧❧❧❧
 
-2. Notations used in this document
-----------------------------------
+Notations used in this document
+-------------------------------
 
 Notation for requests:
 
@@ -127,8 +95,8 @@ or, if multiple of these fields exist:
 
 //                            ❧❧❧❧❧❧❧❧❧❧❧
 
-3. Interoperability between version 1.x and 2.0
------------------------------------------------
+Interoperability between version 1.x and 2.0
+--------------------------------------------
 
 There is little interaction between 1.x and 2.x versions of the X Input
 Extension. Clients are requested to avoid mixing XI1.x and XI2 code as much as
@@ -169,8 +137,8 @@ result, only the first master pointer and master keyboard are visible to XI
 1.x clients; all other master devices are invisible and cannot be accessed
 from XI 1.x calls.
 
-3.4 Smooth scrolling
-~~~~~~~~~~~~~~~~~~~~
+Smooth scrolling
+~~~~~~~~~~~~~~~~
 
 Historically, X implemented scrolling events by using button press events:
 button 4 was one “click” of the scroll wheel upwards, button 5 was downwards,
@@ -296,6 +264,28 @@ ClientPointer to a different master pointer.
 Touch device support
 --------------------
 
+XI 2.2 introduces support for multi-touch devices. The traditional
+pointer/keyboard approach enforced by XI 2.0 with the master/slave device
+hierarchy is not always suitable for multi-touch devices that can provide a
+dynamic number of touchpoints per physical device; it is not known without
+client-specific interpretation whether the touchpoints must be considered
+separately or grouped together.
+
+The additions in XI 2.2 aim to:
+
+- support a dynamic number of simultaneous touch points,
+- support devices that are both multi-touch and traditional pointer devices,
+- allow touchpoints to be either grouped together or handled separately,
+- while supporting pre-XI 2.2 clients through emulation of XI 2.x/XI 1.x and core
+- be backwards-compatible to pre-XI 2.2 clients through emulation of XI 2.x/XI 1.x and core
+  pointer events.
+
+Touch events are only available to clients supporting version 2.2 or later of
+the X Input Extension. Clients must use the XIQueryVersion request to announce
+support for this version. Touch devices may generate emulated pointer events
+alongside XI 2.2 touch events to support older clients; see Section
+<<multitouch-processing,Touch event delivery>>.
+
 Touch event processing differs from normal event processing in a few ways.
 The most notable differences are that touch events are processed partially
 out-of-band from pointer and keyboard events, and that touch events may be
@@ -419,13 +409,18 @@ following device modes are defined for this protocol:
 
 'DirectTouch':
     These devices map their input region to a subset of the screen region. Touch
-    events are delivered to window at the location of the touch. An example
+    events are delivered to window at the location of the touch. "direct"
+    here refers to the user manipulating objects at their screen location,
+    e.g. touching an object and physically moving it. An example
     of a DirectTouch device is a touchscreen.
 
 'DependentTouch':
     These devices do not have a direct correlation between a touch location and
     a position on the screen. Touch events are delivered according to the
-    location of the device's cursor. An Example of a DependentTouch device is a
+    location of the device's cursor and often need to be interpreted
+    relative to the current position of that cursor. Such interactions are
+    usually the result of a gesture performed on the device, rather than
+    direct manipulation. An example of a DependentTouch device is a
     trackpad.
 
 A device is identified as only one of the device modes above at any time, and
@@ -449,6 +444,56 @@ is cleared when all touch sequences on the device end.
 A window set is calculated on TouchBegin and remains constant until the end
 of the sequence. Modifications to the window hierarchy, new grabs or changed
 event selection do not affect the window set.
+
+Pointer control of dependent devices
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+On a dependent device, the device may differ between a pointer-controlling
+touch and a non-pointer-controlling touch. For example, on a touchpad the
+first touch is pointer-controlling (i.e. serves only to move the visible
+pointer). Multi-finger gestures on a touchpad cause all touches to be
+non-pointer-controlling.
+
+For pointer-controlling touches, no touch events are sent; the touch
+generates regular pointer events instead. Non-pointer-controlling touches
+send touch events. A touch may change from pointer-controlling to
+non-pointer-controlling, or vice versa.
+
+- If a touch changes from pointer-controlling to non-pointer-controlling,
+ a new touch ID is assigned and a TouchBegin is sent for the last known
+ position of the touch. Further events are sent as TouchUpdate events, or as
+ TouchEnd event if the touch terminates.
+
+- If a touch changes from non-pointer-controlling to pointer-controlling, a
+  TouchEnd is sent for that touch at the last known position of the touch.
+  Further events are sent as pointer events.
+
+The conditions to switch from pointer-controlling to non-pointer-controlling
+touch is implementation-dependent. A device may support touches that are
+both pointer-controlling and a touch event.
+
+.Dependent touch example event sequence on a touchpad, touches are marked
+when switching to pointer-controlling (pc) or to non-pointer-controlling (np)
+[width="50%", options="header"]
+|====================================================
+| Finger 1 | Finger 2 | Event generated(touchid)
+|  down    |          | Motion
+|  move    |          | Motion
+|  move    |          | Motion
+|  (np)    |   down   | TouchBegin(0), TouchBegin(1)
+|  move    |    --    | TouchUpdate(0)
+|   --     |   move   | TouchUpdate(1)
+|   up     |   (pc)   | TouchEnd(0), TouchEnd(1)
+|          |   move   | Motion
+|  down    |   (np)   | TouchBegin(2), TouchBegin(3)
+|  move    |    --    | TouchUpdate(2)
+|   up     |   (pc)   | TouchEnd(2), TouchEnd(3)
+|          |    up    | Motion
+|  down    |          | Motion
+|  (np)    |   down   | TouchBegin(4), TouchBegin(5)
+|  (pc)    |    up    | TouchEnd(4), TouchEnd(5)
+|  move    |          | Motion
+|   up     |          | Motion
+|====================================================
 
 
 [[multitouch-emulation]]
@@ -564,7 +609,8 @@ Data types
     DEVICEUSE { MasterPointer, MasterKeyboard, SlavePointer,
                 SlaveKeyboard, FloatingSlave }
             A DEVICEUSE field specifies the current use of a device in the MD/SD
-            device hierarchy. See Section 4 for more information.
+            device hierarchy. See Section "The Master/Slave device hierarchy"
+            for more information.
 
     EVENTMASK
             An EVENTMASK is a binary mask defined as (1 << event type).
@@ -1172,8 +1218,8 @@ Set the ClientPointer for the client owning win to the given device.
 Some protocol requests are ambiguous and the server has to choose a device
 to provide data for a request or a reply. By default, the server will
 choose a client's ClientPointer device to provide the data, unless the
-client currently has a grab on another device. See section 4.4 for more
-details.
+client currently has a grab on another device. See section
+<<clientpointer,The ClientPointer principle>> for more details.
 
 If win is None, the ClientPointer for this client is set to the given
 device. Otherwise, if win is a valid window, the ClientPointer for the
@@ -1669,10 +1715,10 @@ before the grab deactivates.
 For GrabtypeTouchBegin, grab_mode must be Touch or a BadValue error
 is generated.
 
-See section 4.4 for additional notes on touch grabs, as they do not
-behave like traditional grabs: in particular, they do not freeze the
-device, and delivery of touch events continues even if the device is
-frozen due to a grab by another client.
+See section <<clientpointer,The ClientPointer principle>> for additional notes
+on touch grabs, as they do not behave like traditional grabs: in
+particular, they do not freeze the device, and delivery of touch events
+continues even if the device is frozen due to a grab by another client.
 
 [[requests-passiveungrabdevice]]
     ┌───
@@ -2336,7 +2382,7 @@ is now the owner of the touch sequence specified by touchid.
         A bitmask of flags for this event.
 
 
-// FIXME: why do we get '11. Appendix A:' rather than just 'Appendix A:'?!
+:numbered!:
 [[xi22-usecases]]
 [appendix]
 XI 2.2 Use-cases
@@ -2345,65 +2391,65 @@ XI 2.2 Use-cases
 All use-cases that include the receiving and processing of touch events
 require the client to announce XI 2.2 support in the XIQueryVersion request.
 
-* Client C wants to process touch events from a device D on window W.
-** C calls XISelectEvent for XI_Touch{Begin|Update|End} from D on W.
-** C receives TouchBegin whenever a touch sequence starts within W's borders.
-** C receives TouchUpdate events whenever an axis valuator value changes for a
+Client C wants to process touch events from a device D on window W.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* C calls XISelectEvent for XI_Touch{Begin|Update|End} from D on W.
+* C receives TouchBegin whenever a touch sequence starts within W's borders.
+* C receives TouchUpdate events whenever an axis valuator value changes for a
    touch sequence it received a TouchBegin event for.
-** C receives TouchEnd whenever a touch it received a TouchBegin event for
+* C receives TouchEnd whenever a touch it received a TouchBegin event for
    ceases.
 
-* Client C wants to pre-process touch events from a device D on window W, while
-  client I wants to pre-process touch events from device D on the parent window
-  of W.
-** C calls XISelectEvent for XI_Touch{Begin|Update|Ownership|End} from D on W.
-** I calls XIPassiveGrab for XI_Touch{Begin|Update|Ownership|End} from D on a
+While client I wants to pre-process touch events from device D on the parent window  of W.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* C calls XISelectEvent for XI_Touch{Begin|Update|Ownership|End} from D on W.
+* I calls XIPassiveGrab for XI_Touch{Begin|Update|Ownership|End} from D on a
    parent window of W.
-** I receives TouchBegin whenever a touch begins within window W, as well as a
+* I receives TouchBegin whenever a touch begins within window W, as well as a
    TouchOwnership event indicating that it currently owns the touch sequence.
    C receives a TouchBegin event as well, but without TouchOwnership.
-** When an axis valuator changes in this touch sequence, both I and C receive a
+* When an axis valuator changes in this touch sequence, both I and C receive a
    TouchUpdate event.  I may process the event to determine if it is going to
    accept or reject the touch, whereas C may perform reversible processing.
-** If I decides it is going to claim the touch sequence for its exclusive
+* If I decides it is going to claim the touch sequence for its exclusive
    processing, it calls XIAllowEvents with an event mode of XIAcceptTouch; at
    this point, C receives a TouchEnd event, and undoes any processing it has
    already performed due to the touch sequence.  Further TouchUpdate events are
    delivered only to I.
-** Alternatively, if I decides it does not want to receive further events
+* Alternatively, if I decides it does not want to receive further events
    from this touch sequence, it calls XIAllowEvents with an event mode of
    XIRejectTouch; at this point, I receives a TouchEnd event confirming that it
    has rejected the touch.  C receives a TouchOwnership event confirming that it
    is now the new owner of the touch, and further TouchUpdate events are
    delivered only to C.  As C now owns the touch, it is free to perform
    irreversible processing of the sequence.
-** When the touch physically ceases, a TouchEnd event is sent to C.
+* When the touch physically ceases, a TouchEnd event is sent to C.
 
-* Client C wants to pre-process touch events from a direct touch device D on
-  window W, while client I wants to process pointer events on window W's parent,
-  window Y.
-** I calls XIPassiveGrab for XI_{ButtonPress,MotionNotify,ButtonRelease} to
+While client I wants to process pointer events on window W's parent, window Y.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+* I calls XIPassiveGrab for XI_{ButtonPress,MotionNotify,ButtonRelease} to
    create a synchronous pointer grab from D on Y.
-** C calls XISelectEvent for XI_Touch{Begin|Update|Ownership|End} from D on W.
-** I receives a ButtonPress event whenever a touch begins within W, and is
+* C calls XISelectEvent for XI_Touch{Begin|Update|Ownership|End} from D on W.
+* I receives a ButtonPress event whenever a touch begins within W, and is
    considered the owner of the event.  C receives a TouchBegin event, but does
    not receive a TouchOwnership event.
-** When the touchpoint moves, C will receive a TouchUpdate event.  Event
+* When the touchpoint moves, C will receive a TouchUpdate event.  Event
    delivery to I is subject to the synchronous delivery mechanism. The
    emulated motion notify event is queued in the server while the device is
    frozen.
-** I may assert ownership by calling XIAllowEvents on Y with any mode other
+* I may assert ownership by calling XIAllowEvents on Y with any mode other
    than ReplayDevice, which will cause all further events to be sent only to I,
    with a TouchEnd event being sent to C.
-** Alternatively, I may reject the touch sequence by calling XIAllowEvents on
+* Alternatively, I may reject the touch sequence by calling XIAllowEvents on
    Y with mode ReplayDevice, which will cause no further events from that touch
    to be sent to I, and a TouchOwnership event to be sent to C, with subsequent
    motion events being sent as TouchUpdate events.
 
-*  Driver DRV provides touch support from tracked device D:
-** DRV initializes a TouchClass for the device.
-** DRV parses D's device protocol and selects one touch sequence to be emulated
+Driver DRV provides touch support from tracked device D:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* DRV initializes a TouchClass for the device.
+* DRV parses D's device protocol and selects one touch sequence to be emulated
    as pointer event.
-** DRV calls the respective input driver API with the touch sequence data. The
+* DRV calls the respective input driver API with the touch sequence data. The
    touch sequence emulating a pointer has the respective flag set. DRV does not
    submit pointer data for any touchpoint.
