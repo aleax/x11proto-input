@@ -1,8 +1,9 @@
-x11proto-input (2.1.99.6-1) UNRELEASED; urgency=low
+x11proto-input (2.1.99.6-1) experimental; urgency=low
 
+  [ Chase Douglas ]
   * New upstream release candidate.
 
- -- Chase Douglas <chase.douglas@ubuntu.com>  Fri, 10 Feb 2012 21:19:51 +0100
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 10 Feb 2012 21:53:18 +0100
 
 x11proto-input (2.1.99.5-2) experimental; urgency=low
 
