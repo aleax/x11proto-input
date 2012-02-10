@@ -1,3 +1,143 @@
+commit 5e18f74e24a17d6a1f18339600a00f5591dc6a82
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Feb 8 03:17:28 2012 +1000
+
+    Unbreak protocol ABI for XIAllowEvents - inputproto 2.1.99.6
+    
+    XIAllowEvents was extended with touchid and grab_window in
+    2ea2f99f4fe1dcd3b8e539ca41c482fc40a0533d. This extended the size of
+    the request from 12 to 20 but also broke the ABI. Older server
+    match the request size exactly, so compiling libXi 1.5 against
+    inputproto 2.2 and then running it against a pre-XI 2.2 server causes a
+    BadLength for any XIAllowEvent request.
+    
+    Add a new request for the new data.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Keith Packard <keithp@keithp.com>
+
+commit 217afacda01b082f39fb6816e62ec20e4791857f
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Thu Jan 26 13:56:38 2012 +1000
+
+    specs: explain touch behaviour for dependent devices
+    
+    Dependent devices don't send touch events until the interaction is a true
+    touch interaction (i.e. doesn't just serve to move the pointer). Once that
+    happens, all touchpoints send touch events exclusively. Pointer movement
+    restarts once we're down to one touch that controls the pointer again.
+    
+    For clients listening to touch events in addition to pointer events, this
+    also means that a two-finger tap looks identical to holding one finger down
+    and tapping with a second-finger. Both actions will result in short
+    TouchBegin/TouchEnd sequences for both fingers.
+    
+    The above is the default behaviour we expect from touchpads, the protocol is
+    more generically worded to leave more room for drivers to decide when a
+    touch only controls the pointer and when it doesn't.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit fc9372868bb772f38a6b17299ef26e3dc9c2ff87
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Thu Jan 26 13:36:24 2012 +1000
+
+    specs: move touch support details to "Touch device support" section
+    
+    Keep the changelog small.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 92f769675b0e39c51280db9690db4b3d80637069
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Thu Jan 26 13:33:40 2012 +1000
+
+    specs: remove superfluous "Changes introduced by ..."
+    
+    The line right above says the same thing.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 556ea96060071ab807ece4f77304208e15f25f9b
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Thu Jan 26 13:32:33 2012 +1000
+
+    specs: move touch mode explanations to where it belongs
+    
+    Rather than have two different explanations to the touch modes, remove it
+    from the "Changes in version 2.2" section and merge the content into the
+    text.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 535a4377ddb4c2680d54b4cbbb273134bb5f58a3
+Author: Gaetan Nadon <memsize@videotron.ca>
+Date:   Wed Jan 25 17:03:15 2012 -0500
+
+    specs: replace hard coded number in some "See section" references
+    
+    The glossary does not accept <<links>> however.
+    
+    Signed-off-by: Gaetan Nadon <memsize@videotron.ca>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit f3d2feead483f6637ef8ff004afad55b5bbf2c62
+Author: Gaetan Nadon <memsize@videotron.ca>
+Date:   Wed Jan 25 17:03:13 2012 -0500
+
+    specs: fix Appendix A title
+    
+    This section starts a new numbered sequence.
+    
+    Signed-off-by: Gaetan Nadon <memsize@videotron.ca>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 9ff28b092f91ea1d7ff58f54a9404347f517361b
+Author: Gaetan Nadon <memsize@videotron.ca>
+Date:   Wed Jan 25 17:03:12 2012 -0500
+
+    specs: remove older manually typed in section number
+    
+    These would come out in html as 5.2, 6.3 and 6.4.3.4
+    
+    Signed-off-by: Gaetan Nadon <memsize@videotron.ca>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 508a360f6530e75d94cd2999e56cb329b315ce5d
+Author: Gaetan Nadon <memsize@videotron.ca>
+Date:   Wed Jan 25 17:03:14 2012 -0500
+
+    specs: use subsections to group use cases description
+    
+    It makes an entry in the appendix for quick navigation.
+    It looks more readable with subtitles.
+    
+    Signed-off-by: Gaetan Nadon <memsize@videotron.ca>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 08ba2d4e1094fb196d1b7a7b3a3b27a81cb9834c
+Author: Gaetan Nadon <memsize@videotron.ca>
+Date:   Wed Jan 25 17:03:11 2012 -0500
+
+    specs: Edit titles for section 3 and 4
+    
+    In the htlm version, the section number appeared to be 3.2.1 and
+    4.2.2 because of the generated section number.
+    
+    A section title should not begin with a number.
+    
+    Signed-off-by: Gaetan Nadon <memsize@videotron.ca>
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
 commit 1306ccf9f262c0c699bec093ffdc4b6695601599
 Author: Peter Hutterer <peter.hutterer@who-t.net>
 Date:   Fri Jan 6 13:35:25 2012 +1000
