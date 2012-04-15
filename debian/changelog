@@ -1,3 +1,9 @@
+x11proto-input (2.2-1) UNRELEASED; urgency=low
+
+  * New upstream release.
+
+ -- Julien Cristau <jcristau@debian.org>  Sun, 15 Apr 2012 16:10:20 +0200
+
 x11proto-input (2.1.99.6-1) experimental; urgency=low
 
   [ Chase Douglas ]

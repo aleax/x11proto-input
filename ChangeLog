@@ -1,3 +1,159 @@
+commit e752e92dbdcf01b1cd46a3853f582ff765d19e90
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 12:58:18 2012 +1000
+
+    inputproto 2.2
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit b02b0b42e266560bd48f7e8f38c8338417394fd0
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Feb 29 15:08:01 2012 +1000
+
+    specs: XI 2.2 release date is March 2012
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 950a7a0b2e733d9713a88612b669603b0c155329
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Feb 29 14:55:26 2012 +1000
+
+    specs: Remove work in progress warning
+    
+    We're close enough to a release now.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 3ac053f2c7ef8d07b4a6dcb64d8ca47edad15716
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 10:31:26 2012 +1000
+
+    specs: remove "since" from TouchOwnershipEvent
+    
+    It's already in a section "Events introduced in version 2.2"
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit b42e4d24a26fb8467ed54183480c9dacd66fc804
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 10:28:46 2012 +1000
+
+    specs: remove TouchOwnership mention from DeviceEvent
+    
+    TouchOwnership is described separately below.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit a09ca92ce31ede86b883cb74fb1767f8ed687ca5
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 10:26:04 2012 +1000
+
+    specs: whitespace fix to avoid wrong asciidoc formatting
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit b1458f6fa9952365f4ad86dc87b385d467318fb1
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 10:25:03 2012 +1000
+
+    specs: fix link to touch ownership section
+    
+    Introduced in 535a4377ddb4c2680d54b4cbbb273134bb5f58a3
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit b321ea46fbb251970c2d655b73209750f24c0b8e
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 10:21:12 2012 +1000
+
+    specs: GrabtypeTouchBegin was added in XI 2.2
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 3773e33579f0b5bd6de9f01481b8608fa3101a2b
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 10:19:42 2012 +1000
+
+    specs: formatting fix, move AcceptTouch and RejectTouch onto their own line
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 4de6f26a705062343f5b93dd9827a736c721e265
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 10:08:33 2012 +1000
+
+    specs: replace † with ²
+    
+    † looks too much like a letter and we can't use * and ** because asciidoc
+    interprets it as lists.
+    
+    Use numbers instead, and replace all current * with ¹.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 000a20296a3c52f4232aa466d29faa2e424ca626
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 10:07:21 2012 +1000
+
+    specs: XITouchClass doesn't have properties
+    
+    Leftover from an earlier version.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 0d7bfc10bffa29de1b7217d6399e8f0d5b24c579
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 09:55:21 2012 +1000
+
+    specs: Formatting fix
+    
+    asciidoc requires caption to be on one line but this one here is too long.
+    Split it up instead.
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 883143e3454c7fe44b12b11fc12ff3ec2267ecd1
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Fri Mar 2 09:32:18 2012 +1000
+
+    specs: some wording fixes
+    
+    Button press events are insufficient even on scroll wheels, so don't say
+    they are good enough.
+    
+    Remove duplicate claim of event emulation
+    
+    Don't claim we send touch events "without delay"
+    
+    Touch screens hardly ever "physically move" an object.
+    
+    Hyphenate "implementation-dependent"
+    
+    Remove unnecessary "however"
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
+commit 9a2e10213c996010124a3d58e71140f41202416c
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Wed Feb 29 14:56:37 2012 +1000
+
+    specs: fix typos 'hierachy' → 'hierarchy'
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+    Reviewed-by: Chase Douglas <chase.douglas@canonical.com>
+
 commit 5e18f74e24a17d6a1f18339600a00f5591dc6a82
 Author: Peter Hutterer <peter.hutterer@who-t.net>
 Date:   Wed Feb 8 03:17:28 2012 +1000
