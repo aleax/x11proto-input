@@ -1,3 +1,29 @@
+commit f33a329026c9f2eaa5fa436543e4feb0e54b685d
+Author: Peter Hutterer <peter.hutterer@who-t.net>
+Date:   Thu Mar 7 10:42:39 2013 +1000
+
+    inputproto 2.3
+    
+    Signed-off-by: Peter Hutterer <peter.hutterer@who-t.net>
+
+commit f8428123019e7357891bbfc0aef21dbb4d0db10f
+Author: Colin Walters <walters@verbum.org>
+Date:   Wed Jan 4 17:37:06 2012 -0500
+
+    autogen.sh: Implement GNOME Build API
+    
+    http://people.gnome.org/~walters/docs/build-api.txt
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+
+commit 8cad031f9f583089dd33bae41dfa8a7e0d8a71f4
+Author: Adam Jackson <ajax@redhat.com>
+Date:   Tue Jan 15 14:01:10 2013 -0500
+
+    configure: Remove AM_MAINTAINER_MODE
+    
+    Signed-off-by: Adam Jackson <ajax@redhat.com>
+
 commit 4832c94775ee4a02cfaf53ba427d7cf677f70932
 Merge: 48e3209 e93e9d0
 Author: Peter Hutterer <peter.hutterer@who-t.net>

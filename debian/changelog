@@ -1,6 +1,6 @@
-x11proto-input (2.2.99.1-1) UNRELEASED; urgency=low
+x11proto-input (2.3-1) UNRELEASED; urgency=low
 
-  * New upstream release candidate.
+  * New upstream release.
 
  -- Maarten Lankhorst <maarten.lankhorst@ubuntu.com>  Tue, 08 Jan 2013 15:01:59 +0100
 
